@@ -15,7 +15,7 @@ import static org.mockito.Mockito.when;
 
 public class WorksWithHerokuServletTest {
 
-    private WorksWithHerokuServlet servlet;
+    private assignment_ex3 servlet;
 
     @Mock
     private HttpServletRequest request;
@@ -26,7 +26,7 @@ public class WorksWithHerokuServletTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        servlet = new WorksWithHerokuServlet();
+        servlet = new assignment_ex3();
     }
 
     @Test
