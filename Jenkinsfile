@@ -3,8 +3,10 @@ pipeline {
 	tools { 
         maven 'Maven 3.0.5' 
         jdk 'jdk8' 
-    }
-	stage ('Initialize') {
+		}
+	
+    stages {
+		stage ('Initialize') {
             steps {
                 sh '''
                     echo "PATH = ${PATH}"
@@ -12,8 +14,8 @@ pipeline {
                 ''' 
             }
         }
-    stages { 
-        stage('Checkout') { 
+        
+		stage('Checkout') { 
             steps { 
                checkout([$class: 'GitSCM', branches: [[name: '*/feature/java_project']], extensions: [], userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/sushant1305/devops_assignment.git']]])
             }
@@ -21,7 +23,8 @@ pipeline {
 		stage ('Build') {
             steps {
                 sh 'mvn -Dmaven.test.failure.ignore=true clean package' 
-            }
+				}
+			}
 		stage('Clean WS'){
 				steps{
 					cleanWs()
