@@ -3,15 +3,15 @@
 		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 
-	<display-name>Works with Heroku</display-name>
+	<display-name>Devops Assignment</display-name>
 
 	<servlet>
-		<servlet-name>WorksWithHerokuServlet</servlet-name>
-		<servlet-class>works.buddy.samples.WorksWithHerokuServlet</servlet-class>
+		<servlet-name>assignment_ex3</servlet-name>
+		<servlet-class>bits.devops.assignment.assignment_ex3</servlet-class>
 	</servlet>
 
 	<servlet-mapping>
-		<servlet-name>WorksWithHerokuServlet</servlet-name>
+		<servlet-name>assignment_ex3</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
