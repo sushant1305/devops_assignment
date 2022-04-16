@@ -2,7 +2,9 @@
 <body>
 <h1>Devops Assignment</h1>
 <body>
-   <img src="Logo.png" alt="Course 1 Icon" width="300" height="300" title="Course"/>
-   <a href="https://bits-pilani-wilp.ac.in/">Link</a>
+   
+   <a href="https://bits-pilani-wilp.ac.in/">
+   <img src="Logo.png" alt="bits_logo" width="300" height="300"/>
+   </a>
 </body>
 </html>
