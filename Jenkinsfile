@@ -25,6 +25,11 @@ pipeline {
                 sh 'mvn -Dmaven.test.failure.ignore=true clean package' 
 				}
 			}
+		stage('Deploy'){
+				steps{
+					sh 'scp target\devops_assignment.war pi@192.168.1.16:/home/pi/softwares/tomcat/apache-tomcat-8.5.78/webapps'
+					}
+			}
 		stage('Clean WS'){
 				steps{
 					cleanWs()
@@ -32,3 +37,5 @@ pipeline {
 			}
 		}
 	}
+	
+	
