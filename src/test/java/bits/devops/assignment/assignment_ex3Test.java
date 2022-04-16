@@ -1,4 +1,4 @@
-package works.buddy.samples;
+package bits.devops.assignment;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,7 +13,7 @@ import java.io.PrintWriter;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
-public class WorksWithHerokuServletTest {
+public class assignment_ex3 {
 
     private assignment_ex3 servlet;
 
