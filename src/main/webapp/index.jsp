@@ -4,7 +4,7 @@
 <body>
    
    <a href="https://bits-pilani-wilp.ac.in/">
-   <img src="Logo.jpg" alt="bits_logo" width="300" height="300"/>
+   <img src="Logo.png" alt="bits_logo" width="300" height="300"/>
    </a>
 </body>
 </html>
