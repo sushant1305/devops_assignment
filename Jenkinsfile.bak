@@ -27,10 +27,14 @@ pipeline {
 			}
         stage('Deploy') {
             steps {
-              sh "aws configure set region $AWS_DEFAULT_REGION" 
-              sh "aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID"  
-              sh "aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY"
-              sh "aws s3 cp target/devops_assignment.war s3://devopsassignment"
+				dir('path/to/your/project/workspace'){
+				pwd(); //Log current directory
+				withAWS(region:'ap-south-1',credentials:'aws-personal') {
+				def identity=awsIdentity();//Log AWS credentials
+
+                // Upload files from working directory 'dist' in your project workspace
+                s3Upload(bucket:"devopsassignment", workingDir:'target', includePathPattern:'devops_assignment.war');
+            }
             }
 		}
 	}
