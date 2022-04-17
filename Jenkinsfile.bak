@@ -34,8 +34,9 @@ pipeline {
 
                 // Upload files from working directory 'dist' in your project workspace
                 s3Upload(bucket:"devopsassignment", workingDir:'target', includePathPattern:'devops_assignment.war');
+				}
             }
-            }
+		}
 		}
 	}
 }
