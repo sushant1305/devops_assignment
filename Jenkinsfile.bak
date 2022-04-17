@@ -25,14 +25,13 @@ pipeline {
                 sh 'mvn -Dmaven.test.failure.ignore=true clean package' 
 				}
 			}
-		stage('Deploy'){
-				steps{
-					// sh 'scp target/devops_assignment.war pi@192.168.1.16:/home/pi/softwares/tomcat/apache-tomcat-8.5.78/webapps'
-					sh 'scp target/devops_assignment.war ec2-user@18.237.173.147:/home/ec2-user/softwares/apache-tomcat-9.0.62/webapps'
-					
-					}
-			}
-		
+        stage('Deploy') {
+            steps {
+              sh "aws configure set region $AWS_DEFAULT_REGION" 
+              sh "aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID"  
+              sh "aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY"
+              sh "aws s3 cp target/devops_assignment.war s3://devopsassignment"
+            }
 		}
 	}
 	
