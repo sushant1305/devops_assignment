@@ -27,7 +27,7 @@ pipeline {
 			}
         stage('Deploy') {
             steps {
-              sh "aws s3 cp target/devops_assignment.war s3://devopsassignment"
+              sh "/home/pi/.local/bin/aws s3 cp target/devops_assignment.war s3://devopsassignment"
             }
 		}
 	}
