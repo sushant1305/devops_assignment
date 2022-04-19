@@ -32,6 +32,7 @@ pipeline {
               sh "aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY"
               sh "aws s3 cp target/devops_assignment.war s3://devopsassignment"
             }
+		}
 		stage('Deploy to Staging') {
             steps {
 			  sh "aws elasticbeanstalk create-application-version --application-name devops_assignment_staging --version-label devops_assignment_staging-source_2.0 --source-bundle S3Bucket=bits-devops-assignment,S3Key=devops_assignment.war"
