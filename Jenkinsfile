@@ -33,7 +33,11 @@ pipeline {
               sh "aws s3 cp target/devops_assignment.war s3://bits-devops-assignment"
             }
 		}
-		
+		stage('Stage Deploy Approval') {
+            steps {
+				input 'Deploy to Staging ?'
+				}
+			}
 		stage('Deploy to Staging') {
             steps {
 			  sh "aws elasticbeanstalk create-application-version --application-name devops_assignment_staging --version-label devops_assignment_staging-source_${BUILD_NUMBER} --source-bundle S3Bucket=bits-devops-assignment,S3Key=devops_assignment.war"
