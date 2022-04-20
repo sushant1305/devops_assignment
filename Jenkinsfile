@@ -43,4 +43,15 @@ pipeline {
             }
 		}
 	}
+	post {
+		always {
+			script {
+				if (currentBuild.currentResult == 'FAILURE') {
+				step([$class: 'Mailer', notifyEveryUnstableBuild: true, recipients: "sushant.mad@gmail.com", sendToIndividuals: true])
+			}
+		}
+	}
+	}
+	
 }
+	
