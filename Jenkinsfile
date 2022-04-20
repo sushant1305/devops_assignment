@@ -33,25 +33,21 @@ pipeline {
               sh "aws s3 cp target/devops_assignment.war s3://bits-devops-assignment"
             }
 		}
+		
 		stage('Deploy to Staging') {
             steps {
-			  sh "aws configure set region $AWS_DEFAULT_REGION"
-              sh "aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID"  
-              sh "aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY"
-			  sh "aws elasticbeanstalk create-application-version --application-name devops_assignment_staging --version-label devops_assignment_staging-source_2.0 --source-bundle S3Bucket=bits-devops-assignment,S3Key=devops_assignment.war"
-			  sh "aws elasticbeanstalk update-environment --application-name devops_assignment_staging --environment-name Devopsassignmentstaging-env --version-label devops_assignment_staging-source_2.0"
+			  sh "aws elasticbeanstalk create-application-version --application-name devops_assignment_staging --version-label devops_assignment_staging-source_${BUILD_NUMBER} --source-bundle S3Bucket=bits-devops-assignment,S3Key=devops_assignment.war"
+			  sh "aws elasticbeanstalk update-environment --application-name devops_assignment_staging --environment-name Devopsassignmentstaging-env --version-label devops_assignment_staging-source_${BUILD_NUMBER}"
+            }
+		}
+		stage('Deploy to Staging') {
+            steps {
+			  sh "aws elasticbeanstalk create-application-version --application-name devops_assignment_production --version-label devops_assignment_staging-prod_${BUILD_NUMBER} --source-bundle S3Bucket=bits-devops-assignment,S3Key=devops_assignment.war"
+			  sh "aws elasticbeanstalk update-environment --application-name devops_assignment_production --environment-name Devopsassignmentproduction-env --version-label devops_assignment_staging-prod_${BUILD_NUMBER}"
             }
 		}
 	}
-	post {
-		always {
-			script {
-				if (currentBuild.currentResult == 'FAILURE') {
-				step([$class: 'Mailer', notifyEveryUnstableBuild: true, recipients: "sushant.mad@gmail.com", sendToIndividuals: true])
-			}
-		}
-	}
-	}
+	
 	
 }
 	
