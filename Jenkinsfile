@@ -33,7 +33,7 @@ pipeline {
               sh "aws s3 cp target/devops_assignment.war s3://bits-devops-assignment"
             }
 		}
-		stage('Stage Deploy Approval') {
+		stage('Deploy Approval: Staging') {
             steps {
 				input 'Deploy to Staging ?'
 				}
@@ -44,7 +44,11 @@ pipeline {
 			  sh "aws elasticbeanstalk update-environment --application-name devops_assignment_staging --environment-name Devopsassignmentstaging-env --version-label devops_assignment_staging-source_${BUILD_NUMBER}"
             }
 		}
-		
+		stage('Deploy Approval: Prod') {
+            steps {
+				input 'Deploy to Prod ?'
+				}
+			}
 		stage('Deploy to Prod') {
             steps {
 			  sh "aws elasticbeanstalk create-application-version --application-name devops_assignment_production --version-label devops_assignment_staging-prod_${BUILD_NUMBER} --source-bundle S3Bucket=bits-devops-assignment,S3Key=devops_assignment.war"
