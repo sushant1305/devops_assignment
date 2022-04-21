@@ -1,4 +1,4 @@
-java-hello-world-webapp
+Devops Assignment Project
 =======================
 
-A simple java web app
+Devops Assignment Project
