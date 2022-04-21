@@ -45,14 +45,14 @@ pipeline {
             }
 		}
 		stage('Deploy Approval: Prod') {
+			when {
+				branch 'master'
+			}
             steps {
 				input 'Deploy to Prod ?'
 				}
 			}
 		stage('Deploy to Prod') {
-			 when {
-				branch 'master'
-			}
             steps {
 			  sh "aws elasticbeanstalk create-application-version --application-name devops_assignment_production --version-label devops_assignment_staging-prod_${BUILD_NUMBER} --source-bundle S3Bucket=bits-devops-assignment,S3Key=devops_assignment.war"
 			  sh "aws elasticbeanstalk update-environment --application-name devops_assignment_production --environment-name Devopsassignmentproduction-env --version-label devops_assignment_staging-prod_${BUILD_NUMBER}"
