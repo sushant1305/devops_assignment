@@ -4,7 +4,9 @@ pipeline {
         maven 'Maven 3.0.5' 
         jdk 'jdk8' 
 		}
-	
+	environment {
+        def BUILDVERSION = sh(script: "echo `date +%s`", returnStdout: true).trim()
+    }
     stages {
 		stage ('Initialize') {
             steps {
@@ -40,8 +42,8 @@ pipeline {
 			}
 		stage('Deploy to Staging') {
             steps {
-			  sh "aws elasticbeanstalk create-application-version --application-name devops_assignment_staging --version-label devops_assignment_staging-source_${BUILD_NUMBER} --source-bundle S3Bucket=bits-devops-assignment,S3Key=devops_assignment.war"
-			  sh "aws elasticbeanstalk update-environment --application-name devops_assignment_staging --environment-name Devopsassignmentstaging-env --version-label devops_assignment_staging-source_${BUILD_NUMBER}"
+			  sh "aws elasticbeanstalk create-application-version --application-name devops_assignment_staging --version-label devops_assignment_staging-source_${BUILDVERSION} --source-bundle S3Bucket=bits-devops-assignment,S3Key=devops_assignment.war"
+			  sh "aws elasticbeanstalk update-environment --application-name devops_assignment_staging --environment-name Devopsassignmentstaging-env --version-label devops_assignment_staging-source_${BUILDVERSION}"
             }
 		}
 		stage('Deploy Approval: Prod') {
@@ -57,8 +59,8 @@ pipeline {
 				branch 'master'
 			}
             steps {
-			  sh "aws elasticbeanstalk create-application-version --application-name devops_assignment_production --version-label devops_assignment_staging-prod_${BUILD_NUMBER} --source-bundle S3Bucket=bits-devops-assignment,S3Key=devops_assignment.war"
-			  sh "aws elasticbeanstalk update-environment --application-name devops_assignment_production --environment-name Devopsassignmentproduction-env --version-label devops_assignment_staging-prod_${BUILD_NUMBER}"
+			  sh "aws elasticbeanstalk create-application-version --application-name devops_assignment_production --version-label devops_assignment_staging-prod_${BUILDVERSION} --source-bundle S3Bucket=bits-devops-assignment,S3Key=devops_assignment.war"
+			  sh "aws elasticbeanstalk update-environment --application-name devops_assignment_production --environment-name Devopsassignmentproduction-env --version-label devops_assignment_staging-prod_${BUILDVERSION}"
             }
 		}
 	}
