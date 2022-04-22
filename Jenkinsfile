@@ -19,7 +19,7 @@ pipeline {
         
 		stage('Checkout') { 
             steps {
-			   resolveScm source: [$class: 'GitSCMSource', credentialsId: 'github', id: '_', remote: 'https://github.com/sushant1305/devops_assignment.git', traits: [gitBranchDiscovery()]], targets: ['feature/java_project', 'master']
+			   resolveScm source: [$class: 'GitSCMSource', credentialsId: 'github', id: '_', remote: 'https://github.com/sushant1305/devops_assignment.git', traits: [gitBranchDiscovery()]], targets: [env.BRANCH_NAME]
             }
         }
 		stage ('Build') {
@@ -42,7 +42,7 @@ pipeline {
 			}
 		stage('Deploy to Staging') {
             steps {
-			  sh "aws elasticbeanstalk create-application-version --application-name devops_assignment_staging --version-label devops_assignment_staging-source_${BUILDVERSION} --source-bundle S3Bucket=bits-devops-assignment,S3Key=devops_assignment.war"
+			  sh "aws elasticbeanstalk create-application-version --application-name devops_assignment_staging --version-label devops_assignment_staging-source_${BUILDVERSION} --source-bundle S3Bucket=bits-devops-assignment,S3Key=devops_assignment12.war"
 			  sh "aws elasticbeanstalk update-environment --application-name devops_assignment_staging --environment-name Devopsassignmentstaging-env --version-label devops_assignment_staging-source_${BUILDVERSION}"
             }
 		}
