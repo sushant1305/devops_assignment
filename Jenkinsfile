@@ -67,8 +67,7 @@ pipeline {
 	post {  
          
          failure {  
-             mail bcc: '', body: '''$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
-			 Check console output at $BUILD_URL to view the results.''', cc: '', from: 'Jenkins', replyTo: '', subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', to: 'sushant.mad@gmail.com'  
+            mail bcc: '', body: "<b>Example</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL of build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "ERROR CI: Project name -> ${env.JOB_NAME}", to: "sushant.mad@gmail.com";  
          } 
      }  
 }
