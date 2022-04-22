@@ -67,7 +67,7 @@ pipeline {
 	post {  
          
          failure {  
-            mail bcc: '', body: "<b>Example</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL of build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "FAILED: ${env.$PROJECT_NAME}-FAILED", to: "sushant.mad@gmail.com";  
+            mail bcc: '', body: "<b>Example</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL of build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "FAILED: ${currentBuild.currentResult}: Job ${env.JOB_NAME}", to: "sushant.mad@gmail.com";  
          } 
      }  
 }
