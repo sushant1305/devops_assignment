@@ -18,9 +18,16 @@ pipeline {
         }
         
 		stage('Checkout') { 
-            steps { 
-               checkout([$class: 'GitSCM', branches: [[name: '*/${env.BRANCH_NAME}']], extensions: [], userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/sushant1305/devops_assignment.git']]])
+            when {
+			branch 'master'
+			steps {
+               checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/sushant1305/devops_assignment.git']]])
+				}
+			
             }
+			steps {
+               checkout([$class: 'GitSCM', branches: [[name: '*/feature/java_project']], extensions: [], userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/sushant1305/devops_assignment.git']]])
+				}
         }
 		stage ('Build') {
             steps {
