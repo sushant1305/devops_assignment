@@ -19,7 +19,7 @@ pipeline {
         
 		stage('Checkout') { 
             steps {
-			   resolveScm source: [$class: 'GitSCMSource', credentialsId: 'github', id: '_', remote: 'https://github.com/sushant1305/devops_assignment.git', traits: [gitBranchDiscovery()]], targets: ['']
+			   resolveScm source: [$class: 'GitSCMSource', credentialsId: 'github', id: '_', remote: 'https://github.com/sushant1305/devops_assignment.git', traits: [gitBranchDiscovery()]], targets: ['feature/java_project', 'master']
             }
         }
 		stage ('Build') {
