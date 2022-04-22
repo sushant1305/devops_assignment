@@ -24,7 +24,7 @@ pipeline {
         }
 		stage ('Build') {
             steps {
-                sh 'mvn -Dmaven.test.failure.ignore=true clean package' 
+                sh 'mvn clean package' 
 				}
 			}
         stage('Publish') {
@@ -42,7 +42,7 @@ pipeline {
 			}
 		stage('Deploy to Staging') {
             steps {
-			  sh "aws elasticbeanstalk create-application-version --application-name devops_assignment_staging --version-label devops_assignment_staging-source_${BUILDVERSION} --source-bundle S3Bucket=bits-devops-assignment,S3Key=devops_assignment.war"
+			  sh "aws elasticbeanstalk create-application-version --application-name devops_assignment_staging --version-label devops_assignment_staging-source_${BUILDVERSION} --source-bundle S3Bucket=bits-devops-assignment,S3Key=devops_assignment12.war"
 			  sh "aws elasticbeanstalk update-environment --application-name devops_assignment_staging --environment-name Devopsassignmentstaging-env --version-label devops_assignment_staging-source_${BUILDVERSION}"
             }
 		}
