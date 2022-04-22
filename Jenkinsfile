@@ -18,8 +18,8 @@ pipeline {
         }
         
 		stage('Checkout') { 
-            steps { 
-               checkout([$class: 'GitSCM', branches: [[name: '*/feature/java_project']], extensions: [], userRemoteConfigs: [[credentialsId: 'github', url: 'https://github.com/sushant1305/devops_assignment.git']]])
+            steps {
+			   resolveScm source: [$class: 'GitSCMSource', credentialsId: 'github', id: '_', remote: 'https://github.com/sushant1305/devops_assignment.git', traits: [gitBranchDiscovery()]], targets: ['feature/java_project', 'master']
             }
         }
 		stage ('Build') {
